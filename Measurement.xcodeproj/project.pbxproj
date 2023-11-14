@@ -11,6 +11,11 @@
 		9E48EDF02B03A91A000BBFCD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E48EDEF2B03A91A000BBFCD /* ContentView.swift */; };
 		9E48EDF22B03A91B000BBFCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E48EDF12B03A91B000BBFCD /* Assets.xcassets */; };
 		9E48EDF52B03A91B000BBFCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E48EDF42B03A91B000BBFCD /* Preview Assets.xcassets */; };
+		9E9D03312B03CE6100D67408 /* LengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03302B03CE6100D67408 /* LengthView.swift */; };
+		9E9D03332B03CF4F00D67408 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03322B03CF4F00D67408 /* TemperatureView.swift */; };
+		9E9D03352B03D7AC00D67408 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03342B03D7AC00D67408 /* VolumeView.swift */; };
+		9E9D03372B03D98C00D67408 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03362B03D98C00D67408 /* TimeView.swift */; };
+		9EA279DB2B0405B3008CF0D7 /* UnitDurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA279DA2B0405B3008CF0D7 /* UnitDurationExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		9E48EDEF2B03A91A000BBFCD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9E48EDF12B03A91B000BBFCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E48EDF42B03A91B000BBFCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9E9D03302B03CE6100D67408 /* LengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthView.swift; sourceTree = "<group>"; };
+		9E9D03322B03CF4F00D67408 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
+		9E9D03342B03D7AC00D67408 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
+		9E9D03362B03D98C00D67408 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
+		9EA279DA2B0405B3008CF0D7 /* UnitDurationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitDurationExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				9E48EDED2B03A91A000BBFCD /* MeasurementApp.swift */,
 				9E48EDEF2B03A91A000BBFCD /* ContentView.swift */,
+				9E9D03362B03D98C00D67408 /* TimeView.swift */,
+				9E9D03342B03D7AC00D67408 /* VolumeView.swift */,
+				9E9D03322B03CF4F00D67408 /* TemperatureView.swift */,
+				9E9D03302B03CE6100D67408 /* LengthView.swift */,
+				9EA279DA2B0405B3008CF0D7 /* UnitDurationExtension.swift */,
 				9E48EDF12B03A91B000BBFCD /* Assets.xcassets */,
 				9E48EDF32B03A91B000BBFCD /* Preview Content */,
 			);
@@ -138,7 +153,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E48EDF02B03A91A000BBFCD /* ContentView.swift in Sources */,
+				9E9D03332B03CF4F00D67408 /* TemperatureView.swift in Sources */,
+				9E9D03352B03D7AC00D67408 /* VolumeView.swift in Sources */,
+				9EA279DB2B0405B3008CF0D7 /* UnitDurationExtension.swift in Sources */,
 				9E48EDEE2B03A91A000BBFCD /* MeasurementApp.swift in Sources */,
+				9E9D03312B03CE6100D67408 /* LengthView.swift in Sources */,
+				9E9D03372B03D98C00D67408 /* TimeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
