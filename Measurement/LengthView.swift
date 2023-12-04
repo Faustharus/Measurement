@@ -52,7 +52,7 @@ struct LengthView: View {
             .navigationTitle("Length")
             .toolbar {
                 Button("Done") {
-                    self.isValueFocused = true
+                    self.isValueFocused = false
                 }
                 .disabled(!isValueFocused)
             }

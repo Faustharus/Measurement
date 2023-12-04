@@ -52,7 +52,7 @@ struct TimeView: View {
             .navigationTitle("Time")
             .toolbar {
                 Button("Done") {
-                    self.isValueFocused = true
+                    self.isValueFocused = false
                 }
                 .disabled(!isValueFocused)
             }

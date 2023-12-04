@@ -51,7 +51,7 @@ struct TemperatureView: View {
             .navigationTitle("Temperature")
             .toolbar {
                 Button("Done") {
-                    self.isValueFocused = true
+                    self.isValueFocused = false
                 }
                 .disabled(!isValueFocused)
             }
