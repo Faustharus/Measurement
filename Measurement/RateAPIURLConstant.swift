@@ -9,6 +9,6 @@ import Foundation
 
 enum RateAPIURLConstant {
     
-    static let rateAPIConvert: String = "http://api.exchangeratesapi.io/v1/convert?"
+    static let rateAPILatest: String = "http://api.exchangeratesapi.io/v1/latest?"
     
 }

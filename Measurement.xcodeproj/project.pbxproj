@@ -15,6 +15,9 @@
 		9E73D6B42B4AF7B400055664 /* RateAPIURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73D6B32B4AF7B400055664 /* RateAPIURLConstant.swift */; };
 		9E73D6B62B4AF7FB00055664 /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73D6B52B4AF7FB00055664 /* CurrencyView.swift */; };
 		9E73D6B82B4AF97E00055664 /* ExchangeRateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73D6B72B4AF97E00055664 /* ExchangeRateAPI.swift */; };
+		9E73D6BA2B4B073900055664 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73D6B92B4B073900055664 /* APIResponse.swift */; };
+		9E73D6BC2B4B08E800055664 /* Rates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E73D6BB2B4B08E800055664 /* Rates.swift */; };
+		9E73D6BE2B4B09FC00055664 /* exchange.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E73D6BD2B4B09FC00055664 /* exchange.json */; };
 		9E9D03312B03CE6100D67408 /* LengthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03302B03CE6100D67408 /* LengthView.swift */; };
 		9E9D03332B03CF4F00D67408 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03322B03CF4F00D67408 /* TemperatureView.swift */; };
 		9E9D03352B03D7AC00D67408 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D03342B03D7AC00D67408 /* VolumeView.swift */; };
@@ -32,6 +35,10 @@
 		9E73D6B32B4AF7B400055664 /* RateAPIURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAPIURLConstant.swift; sourceTree = "<group>"; };
 		9E73D6B52B4AF7FB00055664 /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
 		9E73D6B72B4AF97E00055664 /* ExchangeRateAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPI.swift; sourceTree = "<group>"; };
+		9E73D6B92B4B073900055664 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		9E73D6BB2B4B08E800055664 /* Rates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rates.swift; sourceTree = "<group>"; };
+		9E73D6BD2B4B09FC00055664 /* exchange.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = exchange.json; sourceTree = "<group>"; };
+		9E73D6BF2B4B11AB00055664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9E9D03302B03CE6100D67408 /* LengthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthView.swift; sourceTree = "<group>"; };
 		9E9D03322B03CF4F00D67408 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		9E9D03342B03D7AC00D67408 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
@@ -69,17 +76,21 @@
 		9E48EDEC2B03A91A000BBFCD /* Measurement */ = {
 			isa = PBXGroup;
 			children = (
+				9E73D6BF2B4B11AB00055664 /* Info.plist */,
 				9E48EDED2B03A91A000BBFCD /* MeasurementApp.swift */,
 				9E48EDEF2B03A91A000BBFCD /* ContentView.swift */,
 				9E73D6B72B4AF97E00055664 /* ExchangeRateAPI.swift */,
+				9E73D6BB2B4B08E800055664 /* Rates.swift */,
 				9E73D6B12B4AF72C00055664 /* RateAPIKey.swift */,
 				9E73D6B32B4AF7B400055664 /* RateAPIURLConstant.swift */,
 				9E73D6B52B4AF7FB00055664 /* CurrencyView.swift */,
+				9E73D6B92B4B073900055664 /* APIResponse.swift */,
 				9E9D03362B03D98C00D67408 /* TimeView.swift */,
 				9E9D03342B03D7AC00D67408 /* VolumeView.swift */,
 				9E9D03322B03CF4F00D67408 /* TemperatureView.swift */,
 				9E9D03302B03CE6100D67408 /* LengthView.swift */,
 				9EA279DA2B0405B3008CF0D7 /* UnitDurationExtension.swift */,
+				9E73D6BD2B4B09FC00055664 /* exchange.json */,
 				9E48EDF12B03A91B000BBFCD /* Assets.xcassets */,
 				9E48EDF32B03A91B000BBFCD /* Preview Content */,
 			);
@@ -154,6 +165,7 @@
 			files = (
 				9E48EDF52B03A91B000BBFCD /* Preview Assets.xcassets in Resources */,
 				9E48EDF22B03A91B000BBFCD /* Assets.xcassets in Resources */,
+				9E73D6BE2B4B09FC00055664 /* exchange.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +181,8 @@
 				9E73D6B62B4AF7FB00055664 /* CurrencyView.swift in Sources */,
 				9E9D03332B03CF4F00D67408 /* TemperatureView.swift in Sources */,
 				9E73D6B22B4AF72C00055664 /* RateAPIKey.swift in Sources */,
+				9E73D6BA2B4B073900055664 /* APIResponse.swift in Sources */,
+				9E73D6BC2B4B08E800055664 /* Rates.swift in Sources */,
 				9E9D03352B03D7AC00D67408 /* VolumeView.swift in Sources */,
 				9EA279DB2B0405B3008CF0D7 /* UnitDurationExtension.swift in Sources */,
 				9E73D6B42B4AF7B400055664 /* RateAPIURLConstant.swift in Sources */,
@@ -311,6 +325,7 @@
 				DEVELOPMENT_TEAM = 3D4DRXPTLN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Measurement/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -340,6 +355,7 @@
 				DEVELOPMENT_TEAM = 3D4DRXPTLN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Measurement/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
