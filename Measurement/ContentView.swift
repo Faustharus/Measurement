@@ -33,6 +33,12 @@ struct ContentView: View {
                     Label("Time", systemImage: "clock")
                 }
                 .tag(3)
+            
+            CurrencyView()
+                .tabItem {
+                    Label("Currency", systemImage: "banknote")
+                }
+                .tag(4)
         }
     }
 }
