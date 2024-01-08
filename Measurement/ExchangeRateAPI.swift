@@ -20,12 +20,12 @@ struct ExchangeRateAPI {
         return jsonDecoder
     }()
     
-    private func generateCurrencyExchange(from input: String) -> URL {
-        let url = RateAPIURLConstant.rateAPILatest.appending("access_key=\(apiKey)&base=\(input)&symbols=USD,AUD,CAD,PLN,MXN")
+    private func generateCurrencyExchange(from input: String, with other: String) -> URL {
+        let url = RateAPIURLConstant.rateAPILatest.appending("access_key=\(apiKey)&base=\(input)&symbols=\(other)")
         return URL(string: url)!
     }
     
-    private func fetchRates(from url: URL) async throws -> Rates {
+    private func fetchRates(from url: URL) async throws -> [String: Decimal] {
         let (data, response) = try await session.data(from: url)
         
         guard let response = response as? HTTPURLResponse else {
@@ -46,8 +46,8 @@ struct ExchangeRateAPI {
         }
     }
     
-    func fetch(from input: String) async throws -> Rates {
-        try await fetchRates(from: generateCurrencyExchange(from: input))
+    func fetch(from input: String, with other: String) async throws -> [String: Decimal] {
+        try await fetchRates(from: generateCurrencyExchange(from: input, with: other))
     }
     
 }

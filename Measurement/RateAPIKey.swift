@@ -8,6 +8,5 @@
 import Foundation
 
 struct RateAPIKey {
-    
-    static let apiKey: String = "YOUR_API_KEY_HERE"
+    static let apiKey: String = "YPUR_API_KEY_HERE"
 }

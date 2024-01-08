@@ -10,12 +10,17 @@ import SwiftUI
 struct CurrencyView: View {
     
     @State private var enterValue: Double = 0.0
-    @State private var selectValueFrom: Int = 0
+    @State private var selectValueFrom: Int = 1
     @State private var selectValueTo: Int = 1
+    
+    @State private var selection: String = ""
+    @State var exchanges = [String: Decimal]()
     
     @FocusState private var isValueFocused: Bool
     
     private let ratesAPI = ExchangeRateAPI.shared
+    
+    //let exchanges: Rates?
     
     let currencyText: [String] = ["EUR", "USD", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "AED"]
     let currencyName: [String] = ["Euro", "US Dollar", "GB Pounds", "Japanese Yen", "Canadian Dollar", "Australian Dollar", "Swiss Franc", "Chinese Yuan", "United Arab Emirate Dihram"]
@@ -23,19 +28,18 @@ struct CurrencyView: View {
     var body: some View {
         NavigationStack {
             Form {
-//                Section("Amount to Convert") {
-//                    TextField("Enter your value", value: $enterValue, format: .number)
-//                        .keyboardType(.decimalPad)
-//                        .focused($isValueFocused)
-//                }
                 
                 Section("Select the Unit to Convert From") {
                     Picker("", selection: $selectValueFrom) {
                         ForEach(0 ..< currencyText.count, id: \.self) { item in
-                            Text("\(currencyName[item]) - \(currencyText[item])")
+                            Text("\(currencyText[item])")
                         }
                     }
-                    .pickerStyle(.menu)
+                    .pickerStyle(.navigationLink)
+                }
+                
+                Section("Define your currencies") {
+                    TextField("Add", text: $selection)
                 }
                 
                 Section("Confirm") {
@@ -49,25 +53,27 @@ struct CurrencyView: View {
                 }
                 
                 Section("Results") {
-                    
-                }
-                
-//                Section("Select the Unit to Convert To") {
-//                    Picker("", selection: $selectValueTo) {
-//                        ForEach(0 ..< currencyText.count, id: \.self) { item in
-//                            Text("\(currencyName[item]) - \(currencyText[item])")
+                    VStack {
+                        ForEach(exchanges.sorted(by: >), id: \.key) { key, value in
+                            Text("\(key): \(value, format: .currency(code: key))")
+                        }
+                    }
+//                    if let exchanges = exchanges {
+//                        VStack {
+//                            Text("EUR: \(exchanges.eur)")
+//                            Text("GBP: \(exchanges.gbp)")
+//                            Text("JPY: \(exchanges.jpy)")
+//                            Text("CNY: \(exchanges.cny)")
+//                            Text("CAD: \(exchanges.cad)")
+//                            Text("AUD: \(exchanges.aud)")
+//                            Text("AED: \(exchanges.aed)")
 //                        }
+//                    } else {
+//                        Text("No Data")
 //                    }
-//                    .pickerStyle(.menu)
-//                }
+                }
             }
             .navigationTitle("Currency")
-            .toolbar {
-                Button("Done") {
-                    self.isValueFocused = false
-                }
-                .disabled(!isValueFocused)
-            }
         }
     }
 }
@@ -80,8 +86,15 @@ extension CurrencyView {
     
     func loadExchangeRates() async {
         do {
-            let exchanges = try await ratesAPI.fetch(from: currencyText[selectValueFrom])
-            print("\(exchanges.signatureRate.keys): \(exchanges.signatureRate.values)")
+            exchanges = try await ratesAPI.fetch(from: currencyText[selectValueFrom], with: selection)
+            print("\(exchanges.keys): \(exchanges.values)")
+//            print("EUR: \(exchanges.eur)")
+//            print("GBP: \(exchanges.gbp)")
+//            print("JPY: \(exchanges.jpy)")
+//            print("CNY: \(exchanges.cny)")
+//            print("CAD: \(exchanges.cad)")
+//            print("AUD: \(exchanges.aud)")
+//            print("AED: \(exchanges.aed)")
         } catch {
             print(error.localizedDescription)
         }
