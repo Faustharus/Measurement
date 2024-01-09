@@ -11,42 +11,54 @@ struct CurrencySectionHelp: View {
     
     let currencies = Bundle.main.decode([Currencies].self, from: "currencies.json")
     
-    let currencyText: [String] = ["EUR", "USD", "GBP", "JPY", "CAD", "AUD", "NZD", "CHF", "CNY", "AED", "ZAR", "DZD", "MAD", "TND", "EGP", "KRW", "MXN", "BRL", "ISK", "SEK", "DKK", "NOK", "THB", "MYR"]
-    let currencyName: [String] = ["Euro", "US Dollar", "GB Pounds", "Japanese Yen", "Canadian Dollar", "Australian Dollar", "New Zealand Dollar", "Swiss Franc", "Chinese Yuan Renmibi", "United Arab Emirate Dihram", "South African Rand", "Algerian Dinar", "Moroccan Dirham", "Tunisian Dinar", "Egyptian Pound", "South Korean Won", "Mexican Peso", "Brazilian Real", "Icelandic Krona", "Swedish Krona", "Danish Krone", "Norgewian Krone", "Thai Baht", "Malaysian Ringgit"]
-    
     var body: some View {
         VStack(spacing: 10) {
             Text("⚠️ Default Base Currency is in Euro € ⚠️")
-                .font(.system(size: 17, weight: .light, design: .default))
-                .underline(color: .red)
+                .font(.system(size: 17, weight: .bold, design: .default))
             
             List {
                 ForEach(currencies, id: \.self) { section in
-                    Section(header: Text(section.continent)) {
-                        ForEach(section.countries, id: \.self) { item in
-                            HStack(spacing: 5) {
-                                Text(item.acronym)
-                                Text("-")
-                                Text(item.name)
+                    DisclosureGroup {
+                        Section(header: Text(section.continent)) {
+                            ForEach(section.countries, id: \.self) { item in
+                                HStack(spacing: 5) {
+                                    Text(item.acronym)
+                                    Text("-")
+                                    Text(item.name)
+                                }
                             }
                         }
+                    } label: {
+                        Label("\(section.continent)", systemImage: worldIcon(section.continent))
                     }
                 }
+                .listRowSeparator(.hidden)
             }
-            
-//            VStack(alignment: .leading) {
-//                ForEach(0 ..< currencyText.count, id: \.self) { item in
-//                    HStack {
-//                        Text("\(currencyText[item])")
-//                        Text("-")
-//                        Text("\(currencyName[item])")
-//                    }
-//                }
-//            }
+            .listStyle(.plain)
         }
+        .padding()
     }
 }
 
 #Preview {
     CurrencySectionHelp()
+}
+
+extension CurrencySectionHelp {
+    
+    func worldIcon(_ contient: String) -> String {
+        switch contient {
+        case "America":
+            return "globe.americas"
+        case "Oceania":
+            return "globe.asia.australia"
+        case "Africa":
+            return "globe.europe.africa"
+        case "Asia":
+            return "globe.central.south.asia"
+        default:
+            return "globe.europe.africa"
+        }
+    }
+    
 }

@@ -11,14 +11,13 @@ struct CurrencyView: View {
     
     @StateObject var currencyVM = CurrencyViewModel()
     
-    @FocusState private var isValueFocused: Bool
+    @State private var isHelpOpen: Bool = false
+    
+    //@FocusState private var isValueFocused: Bool
     
     var body: some View {
         NavigationStack {
             Form {
-                Text("⚠️ Default Base Currency is in Euro € ⚠️")
-                    .font(.system(size: 17, weight: .light, design: .default))
-                
                 Section("Define when") {
                     DisclosureGroup {
                         DatePicker("", selection: $currencyVM.currentDate, in: currencyVM.dateRange, displayedComponents: .date)
@@ -51,24 +50,12 @@ struct CurrencyView: View {
                         }
                     }
                 }
-                
-                Section("Confirm") {
-                    Button {
-                        Task {
-                            await loadData()
-                        }
-                    } label: {
-                        Text("Ask Request")
-                    }
-                    .disabled(currencyVM.selection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((currencyVM.selection.rangeOfCharacter(from: .decimalDigits)?.isEmpty) != nil) || currencyVM.enterValue.isZero)
-                }
-                
             }
             .navigationTitle("Currency")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        // TODO: Help Sheet Here
+                        isHelpOpen = true
                     } label: {
                         Label("Help", systemImage: "questionmark.circle")
                     }
@@ -76,11 +63,18 @@ struct CurrencyView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        // TODO: Ask Request
+                        Task {
+                            await loadData()
+                        }
                     } label: {
                         Label("API Request", systemImage: "hourglass")
                     }
+                    .disabled(currencyVM.selection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((currencyVM.selection.rangeOfCharacter(from: .decimalDigits)?.isEmpty) != nil) || currencyVM.enterValue.isZero)
                 }
+            }
+            .sheet(isPresented: $isHelpOpen) {
+                CurrencySectionHelp()
+                    .presentationDetents([.fraction(0.5)])
             }
         }
     }

@@ -69,17 +69,17 @@
         "continent": "Oceania",
         "countries": [
             {
-                "acronym": "Australia",
+                "acronym": "Australian Dollar",
                 "name": "AUD"
             },
             {
-                "acronym": "New Zealand",
+                "acronym": "New Zealand Dollar",
                 "name": "NZD"
             }
         ]
     },
     {
-        "continent:" "Africa",
+        "continent": "Africa",
         "countries": [
             {
                 "acronym": "ZAR",
