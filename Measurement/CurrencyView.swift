@@ -9,71 +9,79 @@ import SwiftUI
 
 struct CurrencyView: View {
     
-    @State private var enterValue: Double = 0.0
-    @State private var selectValueFrom: Int = 1
-    @State private var selectValueTo: Int = 1
-    
-    @State private var selection: String = ""
-    @State var exchanges = [String: Decimal]()
+    @StateObject var currencyVM = CurrencyViewModel()
     
     @FocusState private var isValueFocused: Bool
-    
-    private let ratesAPI = ExchangeRateAPI.shared
-    
-    //let exchanges: Rates?
-    
-    let currencyText: [String] = ["EUR", "USD", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "AED"]
-    let currencyName: [String] = ["Euro", "US Dollar", "GB Pounds", "Japanese Yen", "Canadian Dollar", "Australian Dollar", "Swiss Franc", "Chinese Yuan", "United Arab Emirate Dihram"]
     
     var body: some View {
         NavigationStack {
             Form {
+                Text("⚠️ Default Base Currency is in Euro € ⚠️")
+                    .font(.system(size: 17, weight: .light, design: .default))
                 
-                Section("Select the Unit to Convert From") {
-                    Picker("", selection: $selectValueFrom) {
-                        ForEach(0 ..< currencyText.count, id: \.self) { item in
-                            Text("\(currencyText[item])")
-                        }
+                Section("Define when") {
+                    DisclosureGroup {
+                        DatePicker("", selection: $currencyVM.currentDate, in: currencyVM.dateRange, displayedComponents: .date)
+                            .datePickerStyle(.wheel)
+                    } label: {
+                        Label("Select a date", systemImage: "calendar")
                     }
-                    .pickerStyle(.navigationLink)
+                }
+                
+                Section("Define an Amount") {
+                    TextField("Initial Value at €1,00", value: $currencyVM.enterValue, format: .currency(code: "EUR"))
+                        .keyboardType(.decimalPad)
                 }
                 
                 Section("Define your currencies") {
-                    TextField("Add", text: $selection)
+                    TextField("Ex: EUR,USD,GBP or JPY", text: $currencyVM.selection)
+                        .keyboardType(.alphabet)
+                }
+                
+                Section("Results") {
+                    HStack {
+                        ForEach(currencyVM.exchanges.sorted(by: >), id: \.key) { key, value in
+                            VStack {
+                                HStack(spacing: 5) {
+                                    Text("-")
+                                    Text("\(value * currencyVM.enterValue, format: .currency(code: key).sign(strategy: .accounting))")
+                                    Text("-")
+                                }
+                            }
+                        }
+                    }
                 }
                 
                 Section("Confirm") {
                     Button {
                         Task {
-                            await loadExchangeRates()
+                            await loadData()
                         }
                     } label: {
                         Text("Ask Request")
                     }
+                    .disabled(currencyVM.selection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((currencyVM.selection.rangeOfCharacter(from: .decimalDigits)?.isEmpty) != nil) || currencyVM.enterValue.isZero)
                 }
                 
-                Section("Results") {
-                    VStack {
-                        ForEach(exchanges.sorted(by: >), id: \.key) { key, value in
-                            Text("\(key): \(value, format: .currency(code: key))")
-                        }
-                    }
-//                    if let exchanges = exchanges {
-//                        VStack {
-//                            Text("EUR: \(exchanges.eur)")
-//                            Text("GBP: \(exchanges.gbp)")
-//                            Text("JPY: \(exchanges.jpy)")
-//                            Text("CNY: \(exchanges.cny)")
-//                            Text("CAD: \(exchanges.cad)")
-//                            Text("AUD: \(exchanges.aud)")
-//                            Text("AED: \(exchanges.aed)")
-//                        }
-//                    } else {
-//                        Text("No Data")
-//                    }
-                }
             }
             .navigationTitle("Currency")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        // TODO: Help Sheet Here
+                    } label: {
+                        Label("Help", systemImage: "questionmark.circle")
+                    }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        // TODO: Ask Request
+                    } label: {
+                        Label("API Request", systemImage: "hourglass")
+                    }
+                }
+            }
         }
     }
 }
@@ -84,20 +92,8 @@ struct CurrencyView: View {
 
 extension CurrencyView {
     
-    func loadExchangeRates() async {
-        do {
-            exchanges = try await ratesAPI.fetch(from: currencyText[selectValueFrom], with: selection)
-            print("\(exchanges.keys): \(exchanges.values)")
-//            print("EUR: \(exchanges.eur)")
-//            print("GBP: \(exchanges.gbp)")
-//            print("JPY: \(exchanges.jpy)")
-//            print("CNY: \(exchanges.cny)")
-//            print("CAD: \(exchanges.cad)")
-//            print("AUD: \(exchanges.aud)")
-//            print("AED: \(exchanges.aed)")
-        } catch {
-            print(error.localizedDescription)
-        }
+    func loadData() async {
+        await currencyVM.loadExchangeRates()
     }
     
 }
