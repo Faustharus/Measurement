@@ -1,5 +1,28 @@
 # Measurement
 
+Goal of the App:
+- Creating a Converter for almost our every day lives
+
+Functionalities:
+- Volumes Conversion
+- Temperatures Conversion
+- Time Conversion
+- Length Conversion
+- Currency Conversion
+
+Tools Involved: 
+- XCode
+
+Languages / Technologies / API:
+- Swift
+- SwiftUI
+- ExchangesRatesAPI
+
+Design Pattern / Architecture:
+- MVVM for the Currency Section
+
+⚠️ You will need to create ExchangeRateAPI account to put your own API into the App to test it yourself ⚠️
+
 ![Simulator Screenshot - iPhone 15 - 2024-01-10 at 11 25 46](https://github.com/Faustharus/Measurement/assets/48592115/cc9273f4-ea57-4d66-905d-7f5e45ed94b5)
 ![Simulator Screenshot - iPhone 15 - 2024-01-10 at 11 26 47](https://github.com/Faustharus/Measurement/assets/48592115/796d6e48-4d4a-48bc-a925-987d2b954952)
 ![Simulator Screenshot - iPhone 15 - 2024-01-10 at 11 25 07](https://github.com/Faustharus/Measurement/assets/48592115/597df21f-11b6-4ad3-bc90-6bece1525dcb)
