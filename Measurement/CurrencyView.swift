@@ -13,8 +13,6 @@ struct CurrencyView: View {
     
     @State private var isHelpOpen: Bool = false
     
-    //@FocusState private var isValueFocused: Bool
-    
     var body: some View {
         NavigationStack {
             Form {
@@ -30,22 +28,24 @@ struct CurrencyView: View {
                 Section("Define an Amount") {
                     TextField("Initial Value at €1,00", value: $currencyVM.enterValue, format: .currency(code: "EUR"))
                         .keyboardType(.decimalPad)
+                        .submitLabel(.continue)
                 }
                 
                 Section("Define your currencies") {
                     TextField("Ex: EUR,USD,GBP or JPY", text: $currencyVM.selection)
+                        .textInputAutocapitalization(.characters)
+                        .autocorrectionDisabled()
                         .keyboardType(.alphabet)
+                        .submitLabel(.done)
                 }
                 
                 Section("Results") {
-                    HStack {
+                    VStack(alignment: .leading) {
                         ForEach(currencyVM.exchanges.sorted(by: >), id: \.key) { key, value in
-                            VStack {
-                                HStack(spacing: 5) {
-                                    Text("-")
+                            HStack {
                                     Text("\(value * currencyVM.enterValue, format: .currency(code: key).sign(strategy: .accounting))")
-                                    Text("-")
-                                }
+                                    .frame(height: 25)
+                                
                             }
                         }
                     }

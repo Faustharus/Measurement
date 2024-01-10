@@ -15,6 +15,7 @@ struct CurrencySectionHelp: View {
         VStack(spacing: 10) {
             Text("⚠️ Default Base Currency is in Euro € ⚠️")
                 .font(.system(size: 17, weight: .bold, design: .default))
+                .lineLimit(2)
             
             List {
                 ForEach(currencies, id: \.self) { section in
